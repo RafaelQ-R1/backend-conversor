@@ -6,13 +6,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.js",
-    "queue": "nodemon src/queue.js"
+    "queue": "nodemon src/queue.js",
+    "docker": "docker run -p 49160:8080 -d alien35/node-web-app",
+    "open": "open http://localhost:49160",
+    "go": "npm run dev && npm run docker && docker ps"
+
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "fluent-ffmpeg": "^2.1.2",
     "multer": "^1.4.2",
     "sharp": "^0.26.0"
   },

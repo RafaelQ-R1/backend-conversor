@@ -1,32 +1,29 @@
+/* eslint-disable no-console */
 import fs from 'fs';
 import sharp from 'sharp';
 
-exports.convertImage = async (file, size, format) => {
+exports.convertImage = async (file, size, format, quality) => {
   const newPath = `${file.path.split('.')[0]}.${format}`;
 
-  return sharp(file.path)
+  const convertedImage = await sharp(file.path)
     .resize(size)
     .toFormat(format)
-    .webp({
-      quality: 80,
-    })
-    .toBuffer()
+    .webp({ quality })
+    .toBuffer();
 
-    .then((data) => {
-      fs.access(file.path, (err) => {
-        if (!err) {
-          fs.unlink(file.path, (err) => {
-            if (err) console.log(err);
-          });
-        }
+  await fs.access(file.path, (err) => {
+    if (!err) {
+      fs.unlink(file.path, (error) => {
+        if (error) console.log(error);
       });
+    }
+  });
 
-      fs.writeFile(newPath, data, (err) => {
-        if (err) {
-          throw err;
-        }
-      });
+  const path = await fs.writeFile(newPath, convertedImage, (err) => {
+    if (err) {
+      throw err;
+    }
+  });
 
-      return newPath;
-    });
+  return path;
 };

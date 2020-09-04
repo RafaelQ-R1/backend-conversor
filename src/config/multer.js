@@ -23,7 +23,7 @@ module.exports = {
   dest: path.resolve(__dirname, '..', '..', 'tmp'),
   storage: storageTypes[process.env.STORAGE_TYPE],
   limits: {
-    fileSize: 2 * 1024 * 1024,
+    fileSize: 2 * 1024 * 1024 * 1024,
   },
   fileFilter: (req, file, cb) => {
     const allowedMimes = [
@@ -33,6 +33,8 @@ module.exports = {
       'image/webp',
       'image/tiff',
       'image/svg',
+      'video/mp4',
+      'audio/mp3',
     ];
 
     if (allowedMimes.includes(file.mimetype)) {
