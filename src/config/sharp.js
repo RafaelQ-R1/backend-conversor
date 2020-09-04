@@ -11,7 +11,7 @@ exports.convertImage = async (file, size, format, quality) => {
     .webp({ quality })
     .toBuffer();
 
-  await fs.access(file.path, (err) => {
+  fs.access(file.path, (err) => {
     if (!err) {
       fs.unlink(file.path, (error) => {
         if (error) console.log(error);
@@ -19,7 +19,7 @@ exports.convertImage = async (file, size, format, quality) => {
     }
   });
 
-  const path = await fs.writeFile(newPath, convertedImage, (err) => {
+  const path = fs.writeFile(newPath, convertedImage, (err) => {
     if (err) {
       throw err;
     }

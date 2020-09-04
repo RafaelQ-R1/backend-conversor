@@ -1,4 +1,4 @@
-import VideoConversor from '../config/VideoConversor';
+const VideoConversor = require('../config/VideoConversor');
 
 class ConvertVideo {
   async convert(req, res) {
