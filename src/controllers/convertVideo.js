@@ -1,4 +1,4 @@
-const VideoConversor = require('../config/VideoConversor');
+const VideoConversor = require('../config/fluent');
 
 class ConvertVideo {
   async convert(req, res) {
@@ -9,7 +9,7 @@ class ConvertVideo {
 
       const { file } = req;
 
-      await VideoConversor.ConvertVideo(file, format, res);
+      await VideoConversor.ConvertVideo();
 
       return res.status(200).json(file);
     } catch (err) {

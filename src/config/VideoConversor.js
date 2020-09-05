@@ -8,7 +8,7 @@ exports.ConvertVideo = async (file, format, res) => {
   // const newPath = `${file.path.split('.')[0]}.${format}`;
   const pathToFile = path.resolve(__dirname, '..', '..', 'tmp', `mia.mp4`);
 
-  const convertedVideo = ffmpeg(pathToFile)
+  const convertedVideo = ffmpeg('pathToFile')
     .toFormat('mp3')
     .on('end', function (err) {
       if (err) return err;

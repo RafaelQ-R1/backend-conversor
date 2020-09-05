@@ -8,6 +8,6 @@ const routes = new Router();
 const upload = multer(MulterConfig);
 
 routes.post('/upload_image', upload.single('file'), ConvertImage.convert);
-routes.post('/upload_video', upload.single('file'), ConvertVideo.convert);
+routes.post('/upload_video', ConvertVideo.convert);
 
 export default routes;
