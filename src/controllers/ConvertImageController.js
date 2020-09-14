@@ -5,16 +5,18 @@ const sharp = require('../config/sharp');
 class ConvertImage {
   async convert(req, res) {
     try {
-      const { size, format, quality } = req.body;
+      const { pathToFile, format, size, quality } = req.body;
+      console.log(pathToFile);
 
-      const { file } = req;
-
-      await sharp.convertImage(file, Number(size), format, Number(quality));
+      const convertedImage = await sharp.convertImage(
+        pathToFile,
+        format,
+        size,
+        quality
+      );
 
       return res.status(200).json({
-        name: file.originalname,
-        size: file.size,
-        path: file.path,
+        convertedImage,
       });
     } catch (err) {
       console.log(err);

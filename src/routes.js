@@ -1,13 +1,15 @@
 import { Router } from 'express';
 import multer from 'multer';
 import MulterConfig from './config/multer';
-import ConvertImage from './controllers/convertImage';
-import ConvertVideo from './controllers/convertVideo';
+import ConvertImage from './controllers/ConvertImageController';
+import ConvertVideo from './controllers/ConvertVideoController';
+import uploadFileController from './controllers/uploadFileController';
 
 const routes = new Router();
 const upload = multer(MulterConfig);
 
-routes.post('/upload_image', upload.single('file'), ConvertImage.convert);
-routes.post('/upload_video', ConvertVideo.convert);
+routes.post('/uploadfile', upload.single('file'), uploadFileController.store);
+routes.post('/convert_video', ConvertVideo.convert);
+routes.post('/convert_image', ConvertImage.convert);
 
 export default routes;

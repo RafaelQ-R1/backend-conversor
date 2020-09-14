@@ -2,18 +2,18 @@
 import fs from 'fs';
 import sharp from 'sharp';
 
-exports.convertImage = async (file, size, format, quality) => {
-  const newPath = `${file.path.split('.')[0]}.${format}`;
+exports.convertImage = async (pathToFile, format, size, quality) => {
+  const newPath = `${pathToFile.split('.')[0]}.${format}`;
 
-  const convertedImage = await sharp(file.path)
+  const convertedImage = await sharp(pathToFile)
     .resize(size)
     .toFormat(format)
-    .webp({ quality })
+    .png({ quality })
     .toBuffer();
 
-  fs.access(file.path, (err) => {
+  fs.access(pathToFile, (err) => {
     if (!err) {
-      fs.unlink(file.path, (error) => {
+      fs.unlink(pathToFile, (error) => {
         if (error) console.log(error);
       });
     }
